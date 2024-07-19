@@ -80,6 +80,16 @@ public class BigPoint
 		this.y.add(dy);
 	}
 	
+	@Override
+	public int hashCode()
+	{
+		int result = 0;
+		result = 31 * result + x.hashCode();
+		result = 31 * result + y.hashCode();
+		return result;
+	}
+	
+	@Override
 	public boolean equals(Object obj)
 	{
 		if (obj instanceof BigPoint)
@@ -90,6 +100,7 @@ public class BigPoint
 		return super.equals(obj);
 	}
 	
+	@Override
 	public String toString()
 	{
 		return getClass().getName() + "[x=" + x.toString() + ",y" + y.toString() + "]";
