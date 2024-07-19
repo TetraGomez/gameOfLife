@@ -50,12 +50,23 @@ public class AppWindow implements Runnable
 		}
 	}
 	
+	public static boolean seedIsValid(final char[][] seed)
+	{
+		boolean isValid = true;
+		int size = seed[0].length;
+		for (char[] arr : seed)
+			if (arr.length != size)
+				isValid = false;
+		return isValid;
+	}
+	
 	public static boolean[][] charSeedToBool(final char[][] seed)
 	{
 		boolean[][] result = null;
-		if (seed.length == 0 || seed[0].length == 0 || seed.length != seed[0].length)
-			System.err.println("Incorrect seed dimension. No seed loaded.");
+		if (seed.length == 0 || seed[0].length == 0 || !seedIsValid(seed))
+			System.err.println("Invalid seed dimension. No seed loaded.");
 		else
+		{
 			result = new boolean[seed.length][seed[0].length];
 			for (int i = 0; i < seed.length; i++)
 				for (int k = 0; k < seed[0].length; k++)
@@ -63,7 +74,8 @@ public class AppWindow implements Runnable
 						result[i][k] = true;
 					else if (seed[i][k] != OFF)
 						System.err.println("Invalid value in seed. "
-								+ "Setting cell in position to off state.");
+								+ "Setting cell in its position to off state.");
+		}
 		return result;
 	}
 }
