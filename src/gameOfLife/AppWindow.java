@@ -20,24 +20,32 @@ public class AppWindow implements Runnable
 	public AppWindow(final char[][] seed)
 	{
 		this.window = new JFrame();
+		this.icon = new ImageIcon("resources/conway.png");
 		this.plane = new Plane(window, AppWindow.charSeedToBool(seed));
 		this.game = new GamePanel(plane);
 		this.mouse = new MouseHandler(plane, game);
-		this.icon = new ImageIcon("resources/conway.png");
-		configure();
+		
+		configureWindow();
+		configureGame();
+		
+		this.plane.centerOrigin();
 	}
 	
-	private void configure()
+	private void configureWindow()
 	{
-		game.addMouseListener(mouse);
-		
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setTitle("Game Of Life");
 		window.setIconImage(icon.getImage());
-		window.add(game);
+		
 		window.setSize(WIDTH, HEIGHT);
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
+	}
+	
+	private void configureGame()
+	{
+		game.addMouseListener(mouse);
+		window.add(game);
 	}
 
 	@Override

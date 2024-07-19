@@ -22,8 +22,8 @@ public class Plane
 	{
 		this.window = window;
 		this.onCells = new Hashtable<Point, Cell>();
+		setOffset(new Point());
 		
-		setOffset(new Point(0, 0));
 		initCells(seed);
 	}
 	
@@ -96,11 +96,11 @@ public class Plane
 protected Cell get(
 			final int x,
 			final int y)
-	{
-		Quadrant q = Quadrant.find(x, y);
-		int fixedX = Math.abs(x + q.relativeX());
-		int fixedY = Math.abs(y + q.relativeY());
-		
-		return quadrants.get(q.ordinal()).get(fixedX).get(fixedY);
-	}
+{
+	Quadrant q = Quadrant.find(x, y);
+	int fixedX = Math.abs(x + q.relativeX());
+	int fixedY = Math.abs(y + q.relativeY());
+	
+	return quadrants.get(q.ordinal()).get(fixedX).get(fixedY);
+}
 */

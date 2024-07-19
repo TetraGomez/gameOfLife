@@ -34,15 +34,11 @@ public class Cell
 			final JFrame window)
 	{
 		boolean inBounds = false;
-		
 		Dimension drawBound = window.getSize();
-		drawBound.setSize(new Dimension(
-				drawBound.width + sideLen,
-				drawBound.height + sideLen));
 		
 		if (this.pos.x > negOffset.x - sideLen && this.pos.y > negOffset.y - sideLen
-				&& this.pos.x < drawBound.width + negOffset.x
-				&& this.pos.y < drawBound.height + negOffset.y)
+				&& this.pos.x < drawBound.width + sideLen + negOffset.x
+				&& this.pos.y < drawBound.height + sideLen + negOffset.y)
 			inBounds = true;
 
 		return inBounds;
@@ -65,24 +61,25 @@ public class Cell
 			g.fillRect(xDraw, yDraw, sideLen, sideLen);
 		}
 	}
+	
+	protected void tick() 
+	{ 
+		// TODO: Add tick functionality
+	}
 }
 
 /*
 private int sumNeighbors()
 {
-	
 	int sum = 0;
 	for (Cell cell : neighbors)
 		if (cell.isOn)
 			sum += 1;
 	return sum;
-	
-	return 0;
 }
 
 protected void prepareTick()
 {
-	
 	int sum = sumNeighbors();
 	if (isOn)
 	{
@@ -93,7 +90,7 @@ protected void prepareTick()
 	}
 	else if (sum == 3)
 		this.willBeOn = true;
-	
 }
+
+
 */
-//protected void tick() { this.isOn = this.willBeOn; }

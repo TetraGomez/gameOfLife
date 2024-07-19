@@ -18,7 +18,7 @@ public class PanThread extends Thread
 		this.isPanning = true;
 	}
 	
-	public void stopPanning() { this.isPanning = false; }
+	protected void stopPanning() { this.isPanning = false; }
 	
 	public void run()
 	{
