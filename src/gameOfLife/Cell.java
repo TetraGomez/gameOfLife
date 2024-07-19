@@ -8,9 +8,6 @@ import javax.swing.JFrame;
 
 public class Cell 
 {
-	private boolean isOn;
-	private boolean willBeOn;
-
 	private Point pos;
 	private Quadrant quadrant;
 	
@@ -21,8 +18,6 @@ public class Cell
 			final Point pos,
 			final Quadrant quadrant)
 	{
-		this.isOn = false;
-		this.willBeOn = false;
 		this.quadrant = quadrant;
 		this.pos = drawPos(pos);
 	}
@@ -32,18 +27,6 @@ public class Cell
 		return new Point(
 				pos.x * sideLen - this.quadrant.relativeX() * sideLen,
 				pos.y * sideLen - this.quadrant.relativeY() * sideLen);
-	}
-	
-	private int sumNeighbors()
-	{
-		/*
-		int sum = 0;
-		for (Cell cell : neighbors)
-			if (cell.isOn)
-				sum += 1;
-		return sum;
-		*/
-		return 0;
 	}
 	
 	private boolean isInBounds(
@@ -65,21 +48,7 @@ public class Cell
 		return inBounds;
 	}
 	
-	protected void prepareTick()
-	{
-		int sum = sumNeighbors();
-		if (isOn)
-		{
-			if (sum < 2 || sum > 3)
-				this.willBeOn = false;
-			else
-				this.willBeOn = true;
-		}
-		else if (sum == 3)
-			this.willBeOn = true;
-	}
-	
-	protected void tick() { this.isOn = this.willBeOn; }
+	protected static int sideLen() { return Cell.sideLen; }
 	protected static void setCellSideLen(final int sideLen) { Cell.sideLen = sideLen; }
 	
 	protected void draw(
@@ -93,9 +62,38 @@ public class Cell
 			int xDraw = pos.x + offset.x;
 			int yDraw = pos.y + offset.y;
 			
-			g.drawRect(xDraw, yDraw, sideLen, sideLen);
-			if (isOn)
-				g.fillRect(xDraw, yDraw, sideLen, sideLen);
+			g.fillRect(xDraw, yDraw, sideLen, sideLen);
 		}
 	}
 }
+
+/*
+private int sumNeighbors()
+{
+	
+	int sum = 0;
+	for (Cell cell : neighbors)
+		if (cell.isOn)
+			sum += 1;
+	return sum;
+	
+	return 0;
+}
+
+protected void prepareTick()
+{
+	
+	int sum = sumNeighbors();
+	if (isOn)
+	{
+		if (sum < 2 || sum > 3)
+			this.willBeOn = false;
+		else
+			this.willBeOn = true;
+	}
+	else if (sum == 3)
+		this.willBeOn = true;
+	
+}
+*/
+//protected void tick() { this.isOn = this.willBeOn; }
