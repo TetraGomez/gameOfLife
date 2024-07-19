@@ -30,13 +30,15 @@ public class Plane
 	private void initCells(boolean[][] seed)
 	{
 		Point p = null;
-		for (int i = 0; i < seed.length; i++)
-			for (int k = 0; k < seed[0].length; k++)
-				if (seed[i][k] == true)
-				{
-					p = new Point(i, k);
-					onCells.put(p, new Cell(p, Quadrant.I));
-				}
+		
+		if (seed != null)
+			for (int i = 0; i < seed.length; i++)
+				for (int k = 0; k < seed[0].length; k++)
+					if (seed[i][k] == true)
+					{
+						p = new Point(i, k);
+						onCells.put(p, new Cell(p));
+					}
 	}
 	
 	private void drawGrid(final Graphics g)
