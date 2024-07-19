@@ -80,6 +80,14 @@ public class Plane
 		this.negOffset = new Point(0 - offset.x, 0 - offset.y);
 	}
 	
+	protected synchronized void centerOrigin()
+	{
+		Dimension dim = this.window.getSize();
+		setOffset(new Point(
+				dim.width / 2 - Cell.sideLen(), 
+				dim.height / 2 - Cell.sideLen()));
+	}
+	
 	protected Point offset() { return this.offset; }
 	protected Point negOffset() { return this.negOffset; }
 	
@@ -91,7 +99,14 @@ public class Plane
 	
 	protected void tick()
 	{
+		Cell c = null;
 		
+		Enumeration<Cell> e = onCells.elements();
+		while(e.hasMoreElements())
+		{
+			c = e.nextElement();
+			c.tick();
+		}
 	}
 }
 
