@@ -9,24 +9,20 @@ import javax.swing.JFrame;
 public class Cell 
 {
 	private Point pos;
-	private Quadrant quadrant;
 	
 	protected static final int DEFAULT_SIDE_LEN = 25;
 	private static volatile int sideLen = DEFAULT_SIDE_LEN;
 	
-	public Cell(
-			final Point pos,
-			final Quadrant quadrant)
+	public Cell(final Point pos)
 	{
-		this.quadrant = quadrant;
 		this.pos = drawPos(pos);
 	}
 	
 	private Point drawPos(final Point pos)
 	{
 		return new Point(
-				pos.x * sideLen - this.quadrant.relativeX() * sideLen,
-				pos.y * sideLen - this.quadrant.relativeY() * sideLen);
+				pos.x * sideLen,
+				pos.y * sideLen);
 	}
 	
 	private boolean isInBounds(
