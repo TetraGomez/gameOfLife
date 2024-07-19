@@ -44,6 +44,7 @@ public class Plane
 	private void drawGrid(final Graphics g)
 	{
 		int side = Cell.sideLen();
+		Point offset = new Point(this.offset);
 		Point modOffset = new Point(offset.x % side, offset.y % side);
 		Dimension dim = window.getSize();
 		int numCellsWidth = dim.width / side;
@@ -61,8 +62,11 @@ public class Plane
 	
 	private void drawCells(final Graphics g)
 	{
-		Enumeration<Cell> e = onCells.elements();
+		Point offset = new Point(this.offset);
+		Point negOffset = new Point(this.negOffset);
 		Cell c = null;
+		
+		Enumeration<Cell> e = onCells.elements();
 		while (e.hasMoreElements())
 		{
 			c = e.nextElement();
@@ -80,10 +84,7 @@ public class Plane
 	protected Point negOffset() { return this.negOffset; }
 	
 	protected void draw(final Graphics g)
-	{		
-		Point offset = new Point(this.offset);
-		Point negOffset = new Point(this.negOffset);
-		
+	{				
 		drawGrid(g);
 		drawCells(g);
 	}
