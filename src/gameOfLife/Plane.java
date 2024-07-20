@@ -148,8 +148,6 @@ public class Plane
     protected Point offset() { return this.offset; }
     protected Point negOffset() { return this.negOffset; }
     protected Cell get(final Point pos) { return trackedCells.get(pos); }
-    protected void stageCellAdd(final Cell c) { this.newCells.add(c); }
-    protected void stageCellRemove(final Cell c) { this.removeCells.add(c); }
 
     protected synchronized void draw(final Graphics g)
     {
